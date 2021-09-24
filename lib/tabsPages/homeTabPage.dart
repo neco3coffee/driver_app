@@ -179,29 +179,30 @@ class _HomeTabPageState extends State<HomeTabPage> {
                     borderRadius: new BorderRadius.circular(24.0),
                   ),
                   onPressed: () {
-                    makeDriverOnlineNow();
-                    // if (isDriverAvailable != true) {
-                    //   makeDriverOnlineNow();
-                    //   getLocationLiveUpdates();
+                    // makeDriverOnlineNow();
+                    // getLocationLiveUpdates();
+                    if (isDriverAvailable != true) {
+                      makeDriverOnlineNow();
+                      getLocationLiveUpdates();
 
-                    //   setState(() {
-                    //     driverStatusColor = Colors.green;
-                    //     driverStatusText = "Online Now ";
-                    //     isDriverAvailable = true;
-                    //   });
+                      setState(() {
+                        driverStatusColor = Colors.green;
+                        driverStatusText = "Online Now ";
+                        isDriverAvailable = true;
+                      });
 
-                    //   displayToastMessage("you are Online Now.", context);
-                    // } else {
-                    //   makeDriverOfflineNow();
+                      displayToastMessage("you are Online Now.", context);
+                    } else {
+                      makeDriverOfflineNow();
 
-                    //   setState(() {
-                    //     driverStatusColor = Colors.black;
-                    //     driverStatusText = "Offline Now - Go Online ";
-                    //     isDriverAvailable = false;
-                    //   });
+                      setState(() {
+                        driverStatusColor = Colors.black;
+                        driverStatusText = "Offline Now - Go Online ";
+                        isDriverAvailable = false;
+                      });
 
-                    //   displayToastMessage("you are Offline Now.", context);
-                    // }
+                      displayToastMessage("you are Offline Now.", context);
+                    }
                   },
                   color: driverStatusColor,
                   child: Padding(
@@ -246,23 +247,23 @@ class _HomeTabPageState extends State<HomeTabPage> {
     rideRequestRef.onValue.listen((event) {});
   }
 
-  // void getLocationLiveUpdates() {
-  //   homeTabPageStreamSubscription =
-  //       Geolocator.getPositionStream().listen((Position position) {
-  //     currentPosition = position;
-  //     if (isDriverAvailable == true) {
-  //       Geofire.setLocation(
-  //           currentfirebaseUser.uid, position.latitude, position.longitude);
-  //     }
-  //     LatLng latLng = LatLng(position.latitude, position.longitude);
-  //     newGoogleMapController.animateCamera(CameraUpdate.newLatLng(latLng));
-  //   });
-  // }
+  void getLocationLiveUpdates() {
+    homeTabPageStreamSubscription =
+        Geolocator.getPositionStream().listen((Position position) {
+      currentPosition = position;
+      if (isDriverAvailable == true) {
+        Geofire.setLocation(
+            currentfirebaseUser.uid, position.latitude, position.longitude);
+      }
+      LatLng latLng = LatLng(position.latitude, position.longitude);
+      newGoogleMapController.animateCamera(CameraUpdate.newLatLng(latLng));
+    });
+  }
 
-  // void makeDriverOfflineNow() {
-  //   Geofire.removeLocation(currentfirebaseUser.uid);
-  //   rideRequestRef.onDisconnect();
-  //   rideRequestRef.remove();
-  //   rideRequestRef = null;
-  // }
+  void makeDriverOfflineNow() {
+    Geofire.removeLocation(currentfirebaseUser.uid);
+    rideRequestRef.onDisconnect();
+    rideRequestRef.remove();
+    rideRequestRef = null as DatabaseReference;
+  }
 }
