@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-
-class ProgressDialog extends StatelessWidget 
-{
+class ProgressDialog extends StatelessWidget {
   String message;
-  ProgressDialog({this.message});
+  ProgressDialog({required this.message});
 
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.black54,
       child: Container(
@@ -22,9 +19,15 @@ class ProgressDialog extends StatelessWidget
           padding: EdgeInsets.all(15.0),
           child: Row(
             children: [
-              SizedBox(width: 6.0,),
-              CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black),),
-              SizedBox(width: 26.0,),
+              SizedBox(
+                width: 6.0,
+              ),
+              CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+              ),
+              SizedBox(
+                width: 26.0,
+              ),
               Text(
                 message,
                 style: TextStyle(color: Colors.black, fontSize: 10.0),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:driver_app/AllWidgets/Divider.dart';
-import 'package:driver_app/AllWidgets/progressDialog.dart';
-import 'package:driver_app/Assistants/assistantMethods.dart';
-import 'package:driver_app/Assistants/requestAssistant.dart';
-import 'package:driver_app/DataHandler/appData.dart';
-import 'package:driver_app/Models/address.dart';
-import 'package:driver_app/Models/placePredictions.dart';
-import 'package:driver_app/configMaps.dart';
+import '../AllWidgets/Divider.dart';
+import '../AllWidgets/progressDialog.dart';
+import '../Assistants/assistantMethods.dart';
+import '../Assistants/requestAssistant.dart';
+import '../DataHandler/appData.dart';
+import '../Models/address.dart';
+import '../Models/placePredictions.dart';
+import '../configMaps.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -176,8 +176,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void findPlace(String placeName) async {
     if (placeName.length > 1) {
-      String autoCompleteUrl =
-          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${placeName}&key=${mapKey}&sessiontoken=1234567890&components=country:us";
+      Uri autoCompleteUrl =
+          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${placeName}&key=${mapKey}&sessiontoken=1234567890&components=country:us"
+              as Uri;
 
       var res = await RequestAssistant.getRequest(autoCompleteUrl);
 
@@ -204,7 +205,7 @@ class _SearchScreenState extends State<SearchScreen> {
 class PredictionTile extends StatelessWidget {
   final PlacePredictions placePredictions;
 
-  PredictionTile({Key key, this.placePredictions}) : super(key: key);
+  PredictionTile({Key? key, required this.placePredictions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -233,7 +234,7 @@ class PredictionTile extends StatelessWidget {
                         height: 8.0,
                       ),
                       Text(
-                        placePredictions.main_text,
+                        placePredictions.main_text!,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 16.0),
                       ),
@@ -241,7 +242,7 @@ class PredictionTile extends StatelessWidget {
                         height: 2.0,
                       ),
                       Text(
-                        placePredictions.secondary_text,
+                        placePredictions.secondary_text!,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
@@ -262,15 +263,16 @@ class PredictionTile extends StatelessWidget {
     );
   }
 
-  void getPlaceAddressDetails(String placeId, context) async {
+  void getPlaceAddressDetails(String? placeId, context) async {
     showDialog(
         context: context,
         builder: (BuildContext context) => ProgressDialog(
               message: "Setting Dropoff, Please wait...",
             ));
 
-    String placeDetailsUrl =
-        "https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${mapKey}";
+    Uri placeDetailsUrl =
+        "https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${mapKey}"
+            as Uri;
 
     var res = await RequestAssistant.getRequest(placeDetailsUrl);
 
@@ -283,7 +285,7 @@ class PredictionTile extends StatelessWidget {
     if (res["status"] == "OK") {
       Address address = Address();
       address.placeName = res["result"]["name"];
-      address.placeId = placeId;
+      address.placeId = placeId as String;
       address.latitude = res["result"]["geometry"]["location"]["lat"];
       address.longitude = res["result"]["geometry"]["location"]["lng"];
 

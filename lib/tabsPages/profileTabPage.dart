@@ -1,6 +1,6 @@
-import 'package:driver_app/AllScreens/loginScreen.dart';
-import 'package:driver_app/configMaps.dart';
-import 'package:driver_app/main.dart';
+import '../AllScreens/loginScreen.dart';
+import '../configMaps.dart';
+import '../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
@@ -106,14 +106,14 @@ class ProfileTabPage extends StatelessWidget {
 }
 
 class InfoCard extends StatelessWidget {
-  final String text;
-  final IconData icon;
-  Function onPressed;
+  final String? text;
+  final IconData? icon;
+  VoidCallback onPressed;
 
   InfoCard({
     this.text,
     this.icon,
-    this.onPressed,
+    required this.onPressed,
   });
 
   @override
@@ -129,7 +129,7 @@ class InfoCard extends StatelessWidget {
             color: Colors.black87,
           ),
           title: Text(
-            text,
+            text!,
             style: TextStyle(
               color: Colors.black87,
               fontSize: 16.0,

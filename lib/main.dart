@@ -1,5 +1,5 @@
-import 'package:driver_app/AllScreens/carInfoScreen.dart';
-import 'package:driver_app/configMaps.dart';
+import 'AllScreens/carInfoScreen.dart';
+import 'configMaps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -13,6 +13,8 @@ import 'DataHandler/appData.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  currentfirebaseUser = FirebaseAuth.instance.currentUser as User;
   runApp(MyApp());
 }
 

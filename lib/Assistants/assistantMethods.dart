@@ -5,29 +5,30 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:driver_app/AllScreens/registerationScreen.dart';
-import 'package:driver_app/Assistants/requestAssistant.dart';
-import 'package:driver_app/DataHandler/appData.dart';
-import 'package:driver_app/Models/address.dart';
-import 'package:driver_app/Models/allUsers.dart';
-import 'package:driver_app/Models/directDetails.dart';
-// import 'package:driver_app/DataHandler/appData.dart';
-// import 'package:driver_app/Models/address.dart';
-// import 'package:driver_app/Models/allUsers.dart';
-// import 'package:driver_app/Models/directDetails.dart';
-// import 'package:driver_app/Models/history.dart';
-import 'package:driver_app/configMaps.dart';
+import '../AllScreens/registerationScreen.dart';
+import '../Assistants/requestAssistant.dart';
+import '../DataHandler/appData.dart';
+import '../Models/address.dart';
+import '../Models/allUsers.dart';
+import '../Models/directDetails.dart';
+// import '../DataHandler/appData.dart';
+// import '../Models/address.dart';
+// import '../Models/allUsers.dart';
+// import '../Models/directDetails.dart';
+// import '../Models/history.dart';
+import '../configMaps.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:driver_app/main.dart';
+import '../main.dart';
 
 class AssistantMethods {
   static Future<String> searchCoordinateAddress(
       Position position, context) async {
     String placeAddress = "";
     String st1, st2, st3, st4;
-    String url =
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=${mapKey}";
+    Uri url =
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=${mapKey}"
+            as Uri;
 
     var response = await RequestAssistant.getRequest(url);
 
@@ -51,10 +52,11 @@ class AssistantMethods {
     return placeAddress;
   }
 
-  static Future<DirectionDetails> obtainPlaceDirectionDetails(
+  static Future<DirectionDetails?> obtainPlaceDirectionDetails(
       LatLng initialPosition, LatLng finalPosition) async {
-    String directionUrl =
-        "https://maps.googleapis.com/maps/api/directions/json?origin=${initialPosition.latitude},${initialPosition.longitude}&destination=${finalPosition.latitude},${finalPosition.longitude}&key=${mapKey}";
+    Uri directionUrl =
+        "https://maps.googleapis.com/maps/api/directions/json?origin=${initialPosition.latitude},${initialPosition.longitude}&destination=${finalPosition.latitude},${finalPosition.longitude}&key=${mapKey}"
+            as Uri;
 
     var res = await RequestAssistant.getRequest(directionUrl);
 
@@ -82,8 +84,9 @@ class AssistantMethods {
 
   static int calculateFares(DirectionDetails directionDetails) {
     //in terms USD
-    double timeTraveledFare = (directionDetails.durationValue / 60) * 0.20;
-    double distancTraveledFare = (directionDetails.distanceValue / 1000) * 0.20;
+    double timeTraveledFare = (directionDetails.durationValue! / 60) * 0.20;
+    double distancTraveledFare =
+        (directionDetails.distanceValue! / 1000) * 0.20;
     double totalFareAmount = timeTraveledFare + distancTraveledFare;
 
     //Local Currency
@@ -94,7 +97,7 @@ class AssistantMethods {
   }
 
   static void getCurrentOnlineUserInfo() async {
-    firebaseUser = FirebaseAuth.instance.currentUser;
+    firebaseUser = FirebaseAuth.instance.currentUser!;
     String userId = firebaseUser.uid;
     DatabaseReference reference =
         FirebaseDatabase.instance.reference().child("users").child(userId);

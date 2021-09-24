@@ -1,8 +1,8 @@
-import 'package:driver_app/configMaps.dart';
-import 'package:driver_app/tabsPages/earningsTabPage.dart';
-import 'package:driver_app/tabsPages/homeTabPage.dart';
-import 'package:driver_app/tabsPages/profileTabPage.dart';
-import 'package:driver_app/tabsPages/ratingTabPage.dart';
+import '../configMaps.dart';
+import '../tabsPages/earningsTabPage.dart';
+import '../tabsPages/homeTabPage.dart';
+import '../tabsPages/profileTabPage.dart';
+import '../tabsPages/ratingTabPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
+  late TabController tabController;
   int selectedIndex = 0;
 
   void onItemClicked(int index) {

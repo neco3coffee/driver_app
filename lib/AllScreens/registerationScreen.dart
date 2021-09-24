@@ -1,12 +1,12 @@
-import 'package:driver_app/AllScreens/carInfoScreen.dart';
-import 'package:driver_app/configMaps.dart';
+import '../AllScreens/carInfoScreen.dart';
+import '../configMaps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:driver_app/AllScreens/loginScreen.dart';
-import 'package:driver_app/AllScreens/mainscreen.dart';
-import 'package:driver_app/AllWidgets/progressDialog.dart';
-import 'package:driver_app/main.dart';
+import '../AllScreens/loginScreen.dart';
+import '../AllScreens/mainscreen.dart';
+import '../AllWidgets/progressDialog.dart';
+import '../main.dart';
 
 class RegisterationScreen extends StatelessWidget {
   static const String idScreen = "register";
@@ -189,7 +189,7 @@ class RegisterationScreen extends StatelessWidget {
           );
         });
 
-    final User firebaseUser = (await _firebaseAuth
+    final User? firebaseUser = (await _firebaseAuth
             .createUserWithEmailAndPassword(
                 email: emailTextEditingController.text,
                 password: passwordTextEditingController.text)
