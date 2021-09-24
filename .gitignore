@@ -47,5 +47,6 @@ app.*.map.json
 
 # api key included file
 /android/app/src/main/AndroidManifest.xml 
+/android/app/src/google-services.json
 /ios/Runner/AppDelegate.swift
 /lib/configMaps.dart
