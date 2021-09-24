@@ -44,3 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# api key included file
+/android/app/src/main/AndroidManifest.xml 
+/ios/Runner/AppDelegate.swift
+/lib/configMaps.dart
