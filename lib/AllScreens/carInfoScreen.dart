@@ -1,7 +1,7 @@
-import 'package:driver_app/AllScreens/mainscreen.dart';
-import 'package:driver_app/AllScreens/registerationScreen.dart';
-import 'package:driver_app/configMaps.dart';
-import 'package:driver_app/main.dart';
+import '../AllScreens/mainscreen.dart';
+import '../AllScreens/registerationScreen.dart';
+import '../configMaps.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 
 class CarInfoScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
 
   List<String> carTypesList = ['uber-x', 'uber-go', 'bike'];
 
-  String selectedCarType;
+  late String selectedCarType;
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +93,9 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                       iconSize: 40,
                       hint: Text('Please choose Car Type'),
                       value: selectedCarType,
-                      onChanged: (newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          selectedCarType = newValue;
+                          selectedCarType = newValue!;
                           displayToastMessage(selectedCarType, context);
                         });
                       },

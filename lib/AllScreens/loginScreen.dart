@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:driver_app/AllScreens/mainscreen.dart';
-import 'package:driver_app/AllScreens/registerationScreen.dart';
-import 'package:driver_app/AllWidgets/progressDialog.dart';
-// import 'package:driver_app/configMaps.dart';
-import 'package:driver_app/main.dart';
+import '../AllScreens/mainscreen.dart';
+import '../AllScreens/registerationScreen.dart';
+import '../AllWidgets/progressDialog.dart';
+// import '../configMaps.dart';
+import '../main.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String idScreen = "login";
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         });
 
-    final User firebaseUser = (await _firebaseAuth
+    final User? firebaseUser = (await _firebaseAuth
             .signInWithEmailAndPassword(
                 email: emailTextEditingController.text,
                 password: passwordTextEditingController.text)

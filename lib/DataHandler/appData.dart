@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:driver_app/Models/address.dart';
+import '../Models/address.dart';
 // import 'package:rider_app/Models/history.dart';
 
 class AppData extends ChangeNotifier {
-  Address pickUpLocation, dropOffLocation;
+  late Address pickUpLocation, dropOffLocation;
 
   // String earnings = "0";
   // int countTrips = 0;

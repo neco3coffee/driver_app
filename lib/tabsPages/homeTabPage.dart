@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:driver_app/AllScreens/registerationScreen.dart';
-import 'package:driver_app/Assistants/assistantMethods.dart';
-// import 'package:driver_app/Models/drivers.dart';
-// import 'package:driver_app/Notifications/pushNotificationService.dart';
-import 'package:driver_app/configMaps.dart';
-import 'package:driver_app/main.dart';
+import '../AllScreens/registerationScreen.dart';
+import '../Assistants/assistantMethods.dart';
+// import '../Models/drivers.dart';
+// import '../Notifications/pushNotificationService.dart';
+import '../configMaps.dart';
+import '../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class HomeTabPage extends StatefulWidget {
 
 class _HomeTabPageState extends State<HomeTabPage> {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
-  GoogleMapController newGoogleMapController;
+  late GoogleMapController newGoogleMapController;
 
   var geoLocator = Geolocator();
 
