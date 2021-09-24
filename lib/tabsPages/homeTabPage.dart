@@ -244,7 +244,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
         currentPosition.longitude);
 
     // rideRequestRef.set("searching");
-    rideRequestRef.onValue.listen((event) {});
+    rideRequestRef!.onValue.listen((event) {});
   }
 
   void getLocationLiveUpdates() {
@@ -262,8 +262,8 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   void makeDriverOfflineNow() {
     Geofire.removeLocation(currentfirebaseUser.uid);
-    rideRequestRef.onDisconnect();
-    rideRequestRef.remove();
-    rideRequestRef = null as DatabaseReference;
+    rideRequestRef!.onDisconnect();
+    rideRequestRef!.remove();
+    rideRequestRef = null;
   }
 }
