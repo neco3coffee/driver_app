@@ -74,9 +74,9 @@ class ProfileTabPage extends StatelessWidget {
                 // rideRequestRef.remove();
                 // rideRequestRef = null;
 
-                // FirebaseAuth.instance.signOut();
-                // Navigator.pushNamedAndRemoveUntil(
-                //     context, LoginScreen.idScreen, (route) => false);
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, LoginScreen.idScreen, (route) => false);
               },
               child: Card(
                 color: Colors.red,

@@ -5,6 +5,7 @@ import '../AllScreens/mainscreen.dart';
 import '../AllScreens/registerationScreen.dart';
 import '../AllWidgets/progressDialog.dart';
 // import '../configMaps.dart';
+import '../configMaps.dart';
 import '../main.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -157,8 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
         .user;
 
     if (firebaseUser != null) {
-      usersRef.child(firebaseUser.uid).once().then((DataSnapshot snap) {
+      driversRef.child(firebaseUser.uid).once().then((DataSnapshot snap) {
         if (snap.value != null) {
+          currentfirebaseUser = firebaseUser;
           Navigator.pushNamedAndRemoveUntil(
               context, MainScreen.idScreen, (route) => false);
           displayToastMessage("you are logged-in now.", context);
